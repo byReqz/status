@@ -27,7 +27,7 @@ function get_code {
 	fi
 	http_server=" | $(echo "$http_raw" | grep Server: | cut -d " " -f 2)]"
 	http_results=""$http_results"
-$(printf "%-50s%s\n" ["$h"] "$http_code""$http_server")"
+ $(printf "%-50s%s\n" ["$h"] "$http_code""$http_server")"
 }
 
 function get_ping {
@@ -43,9 +43,10 @@ function get_ping {
 		ping_ms=""
 	fi
 	ping_results=""$ping_results"
-$(printf "%-50s%s\n" ["$p]" "$ping_reach""$ping_ms")"
+ $(printf "%-50s%s\n" ["$p"] "$ping_reach""$ping_ms")"
 }
 
+printf [--------------------------------------------------------------------]
 if [[ "$ping_hosts" != "none" ]];then
 	for p in "${ping_hosts[@]}";do
 		get_ping
@@ -58,3 +59,4 @@ if [[ "$http_hosts" != "none" ]];then
 	done
 	echo -e "$http_results"
 fi
+echo [--------------------------------------------------------------------]
