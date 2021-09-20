@@ -1,0 +1,21 @@
+version: '2.3'
+
+services:
+  gotty-status:
+    container_name: gotty-status
+    image: byreqz/gotty:latest
+    restart: unless-stopped
+    ports:
+     - 8080:8080
+    environment:
+     - port=8080
+#     - userpass=user:pass
+     - title=status
+     - use_tmux=true
+     - pkgs=fping curl bash
+     - ping_hosts=nils.lol
+     - http_hosts=https://nils.lol
+     - command=bash /status.sh
+    volumes:
+     - ./status-server.sh:/status.sh
+
