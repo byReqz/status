@@ -25,9 +25,9 @@ function get_code {
         elif [[ "$http_code" < 599 && "$http_code" > 499 ]];then
                 http_code="[\e[31m"$http_code"\e[0m"
 	fi
-	http_server=" | $(echo "$http_raw" | grep --ignore-case "server" | sort -u | cut -d " " -f 2)]"
+	http_server=" | \e[1;34m$(echo "$http_raw" | grep -i "server" | sort -u | cut -d " " -f 2)\e[0m]"
 	http_results=""$http_results"
- $(printf "%-50s%s\n" ["$h"] "$http_code""$http_server")"
+ $(printf "%-63s%s\n" ["\e[1;35m"$h"\e[0m"] "$http_code""$http_server")"
 }
 
 function get_ping {
@@ -37,13 +37,13 @@ function get_ping {
 		ping_reach="[\e[32munreachable\e[0m]"
 	elif [[ "$ping_reach" == "alive" ]];then
 		ping_reach="[\e[32malive\e[0m"
-		ping_ms=" | $(echo "$ping_raw" | cut -d "(" -f 2 | cut -d ")" -f 1)]"
+		ping_ms=" | \e[1;34m$(echo "$ping_raw" | cut -d "(" -f 2 | cut -d ")" -f 1)\e[0m]"
 	else
 		ping_reach="[error]"
 		ping_ms=""
 	fi
 	ping_results=""$ping_results"
- $(printf "%-50s%s\n" ["$p"] "$ping_reach""$ping_ms")"
+ $(printf "%-63s%s\n" ["\e[1;35m"$p"\e[0m"] "$ping_reach""$ping_ms")"
 }
 
 printf [--------------------------------------------------------------------]
