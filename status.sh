@@ -48,12 +48,16 @@ function get_ping {
 
 printf [--------------------------------------------------------------------]
 if [[ "$ping_hosts" != "none" ]];then
+	echo  ""
+	printf "\e[1;4mPing Hosts:\e[0m"
 	for p in "${ping_hosts[@]}";do
 		get_ping
 	done
 	echo -e "$ping_results"
 fi
 if [[ "$http_hosts" != "none" ]];then
+        echo  ""
+        printf "\e[1;4mHTTP Hosts:\e[0m"
 	for h in "${http_hosts[@]}";do
 		get_code
 	done
