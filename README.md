@@ -9,4 +9,6 @@ export ping_hosts="localhost localhost" && export http_hosts="https://duck.com h
 - do not quote individual hosts
 - https needs to specified most of the time to avoid 308s
 
+the status-server.sh file includes a loop at the end which is needed in my docker setup, nothing else is different
+
 for running the script in docker, see the included compose file
