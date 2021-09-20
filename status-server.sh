@@ -71,6 +71,6 @@ while true;do
 	main
 	http_results=""
 	ping_results=""
-	sleep 5
+	sleep 2m
 	clear
 done
