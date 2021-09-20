@@ -25,7 +25,7 @@ function get_code {
         elif [[ "$http_code" < 599 && "$http_code" > 499 ]];then
                 http_code="[\e[31m"$http_code"\e[0m"
 	fi
-	http_server=" | \e[1;34m$(echo "$http_raw" | grep -i "server" | sort -u | cut -d " " -f 2)\e[0m]"
+	http_server=" | \e[1;34m$(echo "$http_raw" | grep -i "server" | sort -u | cut -d " " -f 2 | tr -s '\n' ' '| xargs | sed 's/ / + /g')\e[0m]"
 	http_results=""$http_results"
  $(printf "%-63s%s\n" ["\e[1;35m"$h"\e[0m"] "$http_code""$http_server")"
 }
