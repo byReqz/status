@@ -25,7 +25,12 @@ function get_code {
         elif [[ "$http_code" < 599 && "$http_code" > 499 ]];then
                 http_code="[\e[31m"$http_code"\e[0m"
 	fi
-	http_server=" | \e[1;34m$(echo "$http_raw" | grep -i "server" | sort -u | cut -d " " -f 2 | tr -s '\n' ' '| xargs | sed 's/ / + /g')\e[0m]"
+	if [[ -z "$http_code" ]];then
+		http_code="[\e[1;31merror\e[0m]"
+		http_server=""
+	else
+		http_server=" | \e[1;34m$(echo "$http_raw" | grep -i "server" | sort -u | cut -d " " -f 2 | tr -s '\n' ' '| xargs | sed 's/ / + /g')\e[0m]"
+	fi
 	http_results=""$http_results"
  $(printf "%-63s%s\n" ["\e[1;35m"$h"\e[0m"] "$http_code""$http_server")"
 }
@@ -39,7 +44,7 @@ function get_ping {
 		ping_reach="[\e[32malive\e[0m"
 		ping_ms=" | \e[1;34m$(echo "$ping_raw" | cut -d "(" -f 2 | cut -d ")" -f 1)\e[0m]"
 	else
-		ping_reach="[error]"
+		ping_reach="[\e[1;31merror\e[0m]"
 		ping_ms=""
 	fi
 	ping_results=""$ping_results"
